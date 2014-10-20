@@ -3,10 +3,10 @@ package com.eoutletz.domain.handler;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.eoutletz.domain.User;
 import com.eoutletz.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /*
  * {

@@ -2,18 +2,14 @@ package com.eoutletz.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -43,8 +39,8 @@ public class Order implements Serializable {
 	@JoinColumn(name = "payment_type_id")
 	private PaymentType paymentType;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orders")
-	private Set<Product> products = new HashSet<Product>(0);
+//	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orders")
+//	private Set<Product> products = new HashSet<Product>(0);
 	
 	   @Column(name = "create_date	",
 	            nullable = false,
@@ -91,13 +87,13 @@ public class Order implements Serializable {
 		this.address = address;
 	}
 
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
+//	public Set<Product> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(Set<Product> products) {
+//		this.products = products;
+//	}
 
 	public PaymentType getPaymentType() {
 		return paymentType;

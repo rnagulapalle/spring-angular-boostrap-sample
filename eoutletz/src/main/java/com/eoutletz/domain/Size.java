@@ -2,17 +2,12 @@ package com.eoutletz.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
@@ -32,8 +27,8 @@ public class Size implements Serializable {
 	@Column(name = "size", nullable = false)
 	private String size;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "size")
-	private Set<Product> products = new HashSet<Product>(0);
+//	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "size")
+//	private Set<Product> products = new HashSet<Product>(0);
 	
 	   @Column(name = "create_date	",
 	            nullable = false,
@@ -64,13 +59,13 @@ public class Size implements Serializable {
 		}
 
 
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
+//	public Set<Product> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(Set<Product> products) {
+//		this.products = products;
+//	}
 	
 	
 }

@@ -2,17 +2,12 @@ package com.eoutletz.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
@@ -35,11 +30,11 @@ public class Partner implements Serializable {
 	private String name;
 	
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "partner")
-	private Set<PartnerContact> partnerContacts = new HashSet<PartnerContact>(0);
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "partner")
+//	private Set<PartnerContact> partnerContacts = new HashSet<PartnerContact>(0);
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
-	private Set<Product> products = new HashSet<Product>(0);
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
+//	private Set<Product> products = new HashSet<Product>(0);
 
 	   @Column(name = "create_date	",
 	            nullable = false,
@@ -83,18 +78,18 @@ public class Partner implements Serializable {
 		this.name = name;
 	}
 	
-	public Set<PartnerContact> getPartnerContacts() {
-		return partnerContacts;
-	}
-	public void setPartnerContacts(Set<PartnerContact> partnerContacts) {
-		this.partnerContacts = partnerContacts;
-	}
+//	public Set<PartnerContact> getPartnerContacts() {
+//		return partnerContacts;
+//	}
+//	public void setPartnerContacts(Set<PartnerContact> partnerContacts) {
+//		this.partnerContacts = partnerContacts;
+//	}
 	
-	public Set<Product> getProducts() {
-		return products;
-	}
-	
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
+//	public Set<Product> getProducts() {
+//		return products;
+//	}
+//	
+//	public void setProducts(Set<Product> products) {
+//		this.products = products;
+//	}
 }
