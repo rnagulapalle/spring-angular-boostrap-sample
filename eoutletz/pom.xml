@@ -270,6 +270,7 @@
 	</properties>
 
 	<build>
+		<finalName>eoutletz</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
