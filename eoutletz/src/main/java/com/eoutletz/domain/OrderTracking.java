@@ -36,7 +36,7 @@ public class OrderTracking implements Serializable {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "order_id")
-	private Order order;
+	private Orders order;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "order_status_id")
@@ -87,11 +87,11 @@ public class OrderTracking implements Serializable {
 		this.comments = comments;
 	}
 
-	public Order getOrder() {
+	public Orders getOrder() {
 		return order;
 	}
 
-	public void setOrder(Order order) {
+	public void setOrder(Orders order) {
 		this.order = order;
 	}
 

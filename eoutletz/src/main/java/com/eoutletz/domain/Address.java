@@ -2,19 +2,15 @@ package com.eoutletz.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
@@ -22,70 +18,66 @@ import org.hibernate.annotations.GenerationTime;
 
 @Entity
 @Table(name = "Address")
-public class Address implements Serializable{
+public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    protected Long id;
-	
-	@Column(name="address1", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	protected Long id;
+
+	@Column(name = "address1", nullable = false)
 	private String address1;
-	
-	@Column(name="address2")
+
+	@Column(name = "address2")
 	private String address2;
-	
-	@Column(name="city", nullable=false)
+
+	@Column(name = "city", nullable = false)
 	private String city;
-	
-	@Column(name="state", nullable=false)
+
+	@Column(name = "state", nullable = false)
 	private String state;
-	
-	@Column(name="postalcode", nullable=false)
+
+	@Column(name = "postalcode", nullable = false)
 	private String postalCode;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_type_id")
 	private AddressType addressType;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "address")
-	private Set<Order> orders = new HashSet<Order>(0);
+	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
+	// "address")
+	// private Set<Order> orders = new HashSet<Order>(0);
 
-	   @Column(name = "create_date	",
-	            nullable = false,
-	            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	    @Generated(value = GenerationTime.INSERT)
-	    protected Date createdTime;
+	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Generated(value = GenerationTime.INSERT)
+	protected Date createdTime;
 
-	    @Column(name = "update_date",
-	            nullable = false,
-	            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	    @Generated(value = GenerationTime.ALWAYS)
-	    protected Date updatedTime;
+	@Column(name = "update_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Generated(value = GenerationTime.ALWAYS)
+	protected Date updatedTime;
 
-	    public Date getCreatedTime() {
-	        return createdTime;
-	    }
+	public Date getCreatedTime() {
+		return createdTime;
+	}
 
-	    public Date getUpdatedTime() {
-	        return updatedTime;
-	    }
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
 
-		public void setCreatedTime(Date createdTime) {
-			this.createdTime = createdTime;
-		}
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
 
-		public void setUpdatedTime(Date updatedTime) {
-			this.updatedTime = updatedTime;
-		}
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
 
-	
 	public String getAddress1() {
 		return address1;
 	}
@@ -142,11 +134,11 @@ public class Address implements Serializable{
 		this.user = user;
 	}
 
-	public Set<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
-	}
+	// public Set<Order> getOrders() {
+	// return orders;
+	// }
+	//
+	// public void setOrders(Set<Order> orders) {
+	// this.orders = orders;
+	// }
 }
