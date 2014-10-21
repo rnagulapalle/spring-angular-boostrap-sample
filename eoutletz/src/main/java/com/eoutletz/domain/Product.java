@@ -65,26 +65,17 @@ public class Product implements Serializable {
 	@Column(name = "unit_price", nullable = false)
 	private BigDecimal unitPrice;
 
-	 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 @JoinTable(name = "Product_Category", joinColumns = {
-	 @JoinColumn(name = "product_id", nullable = false, updatable = false) },
-	 inverseJoinColumns = { @JoinColumn(name = "category_id",
-	 nullable = false, updatable = false) })
-	 private Set<Category> categories = new HashSet<Category>(0);
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Product_Category", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "category_id", nullable = false, updatable = false) })
+	private Set<Category> categories = new HashSet<Category>(0);
 
-	 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 @JoinTable(name = "Product_Color", joinColumns = {
-	 @JoinColumn(name = "product_id", nullable = false, updatable = false) },
-	 inverseJoinColumns = { @JoinColumn(name = "color_id",
-	 nullable = false, updatable = false) })
-	 private Set<Color> colors = new HashSet<Color>(0);
-	
-	 @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @JoinTable(name = "Product_Size", joinColumns = {
-	 @JoinColumn(name = "product_id", nullable = false, updatable = false) },
-	 inverseJoinColumns = { @JoinColumn(name = "size_id",
-	 nullable = false, updatable = false) })
-	 private Set<Size> size = new HashSet<Size>(0);
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "color_id", nullable = false, updatable = false) })
+	private Set<Color> colors = new HashSet<Color>(0);
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "Product_Size", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "size_id", nullable = false, updatable = false) })
+	private Set<Size> size = new HashSet<Size>(0);
 	//
 	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	// @JoinTable(name = "Product_Order", joinColumns = {
@@ -93,9 +84,9 @@ public class Product implements Serializable {
 	// nullable = false, updatable = false) })
 	// private Set<Order> orders = new HashSet<Order>(0);
 
-	 @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
-	 @Cascade(org.hibernate.annotations.CascadeType.ALL)
-	 private Set<Image> images = new HashSet<Image>(0);
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private Set<Image> images = new HashSet<Image>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Generated(value = GenerationTime.INSERT)
@@ -200,18 +191,23 @@ public class Product implements Serializable {
 	public void setUnitPrice(BigDecimal unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	 public Set<Category> getCategories() {
-	 return categories;
-	 }
-	 public void setCategories(Set<Category> categories) {
-	 this.categories = categories;
-	 }
-	 public Set<Color> getColors() {
-	 return colors;
-	 }
-	 public void setColors(Set<Color> colors) {
-	 this.colors = colors;
-	 }
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public Set<Color> getColors() {
+		return colors;
+	}
+
+	public void setColors(Set<Color> colors) {
+		this.colors = colors;
+	}
+
 	public Set<Size> getSize() {
 		return size;
 	}
@@ -219,6 +215,7 @@ public class Product implements Serializable {
 	public void setSize(Set<Size> size) {
 		this.size = size;
 	}
+
 	// public Set<Order> getOrders() {
 	// return orders;
 	// }
