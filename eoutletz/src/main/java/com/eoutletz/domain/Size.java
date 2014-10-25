@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Size")
@@ -29,12 +30,12 @@ public class Size implements Serializable {
 	@Column(name = "id")
 	protected Long id;
 
-	@Column(name = "size", nullable = false)
+	@Column(name = "size", nullable = false, unique = true)
+	@NotEmpty
 	private String size;
 
-	 @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy =
-	 "size")
-	 private Set<Product> products = new HashSet<Product>(0);
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "size")
+	private Set<Product> products = new HashSet<Product>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Generated(value = GenerationTime.INSERT)
@@ -60,12 +61,28 @@ public class Size implements Serializable {
 		this.updatedTime = updatedTime;
 	}
 
-	 public Set<Product> getProducts() {
-	 return products;
-	 }
-	
-	 public void setProducts(Set<Product> products) {
-	 this.products = products;
-	 }
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 }

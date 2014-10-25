@@ -10,7 +10,9 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
+import com.eoutletz.domain.validator.BeforeCreatePartnerValidator;
 import com.eoutletz.domain.validator.BeforeCreateUserValidator;
+import com.eoutletz.repository.PartnerRepository;
 import com.eoutletz.repository.UserRepository;
 
 /**
@@ -25,10 +27,15 @@ public class EoutletzRepositoryRestMvcConfiguration extends RepositoryRestMvcCon
 	@Inject 
 	private UserRepository userRepository;
 	
+	@Inject
+	private PartnerRepository partnerRepository;
+	
 	@Override
 	protected void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener v) 
 	{
 		v.addValidator("beforeCreate", new BeforeCreateUserValidator(userRepository));
+		
+		v.addValidator("beforeCreate", new BeforeCreatePartnerValidator(partnerRepository));
 	}
 	
 	@Override

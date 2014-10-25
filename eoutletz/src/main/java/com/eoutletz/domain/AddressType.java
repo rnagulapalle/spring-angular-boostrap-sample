@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "Address_Type")
 public class AddressType implements Serializable {
@@ -20,7 +22,8 @@ public class AddressType implements Serializable {
     @Column(name = "id")
     protected Long id;
 	
-	@Column(name = "type", nullable = false)
+	@Column(name = "type", nullable = false, unique = true)
+	@NotEmpty
 	private String type;
 	
 	public String getType() {

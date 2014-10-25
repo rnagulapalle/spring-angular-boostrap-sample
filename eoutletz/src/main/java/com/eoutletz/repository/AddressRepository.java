@@ -10,8 +10,7 @@ import com.eoutletz.domain.Address;
  *
  */
 @RepositoryRestResource(collectionResourceRel = "addresses", path = "addresses")
-public interface AddressRepository extends PagingAndSortingRepository<Address, Long>
-{
+public interface AddressRepository extends PagingAndSortingRepository<Address, Long>{
 	
 
 }

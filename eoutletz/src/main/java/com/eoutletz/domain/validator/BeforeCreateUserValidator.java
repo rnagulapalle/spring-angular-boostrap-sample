@@ -11,7 +11,7 @@ public class BeforeCreateUserValidator implements Validator {
 
 	private UserRepository userRepository;
 
-	public BeforeCreateUserValidator(UserRepository userRepository)
+	public BeforeCreateUserValidator(final UserRepository userRepository)
 	{
 		this.userRepository = userRepository;
 	}

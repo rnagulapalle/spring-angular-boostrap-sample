@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Category")
@@ -29,7 +30,8 @@ public class Category implements Serializable {
 	@Column(name = "id")
 	protected Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, unique = true)
+	@NotEmpty
 	private String name;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "categories")

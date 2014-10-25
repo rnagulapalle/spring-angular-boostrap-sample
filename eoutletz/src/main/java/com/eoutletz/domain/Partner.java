@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Partner")
@@ -29,9 +30,11 @@ public class Partner implements Serializable {
 	protected Long id;
 
 	@Column(name = "email", unique = true)
+	@NotEmpty
 	private String email;
 
 	@Column(name = "name")
+	@NotEmpty
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "partner")

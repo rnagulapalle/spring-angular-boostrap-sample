@@ -19,10 +19,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Product")
@@ -35,34 +37,42 @@ public class Product implements Serializable {
 	protected Long id;
 
 	@Column(name = "name", nullable = false)
+	@NotEmpty
 	private String name;
 
 	@Column(name = "sku", nullable = false)
 	private String sku;
 
 	@Column(name = "price", nullable = false)
+	@NotNull
 	private BigDecimal price;
 
 	@Column(name = "description", nullable = false)
-	private String decription;
+	@NotEmpty
+	private String description;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "partner_id")
 	private Partner partner;
-
+	
 	@Column(name = "quantity", nullable = false)
+	@NotNull
 	private Long quantity;
 
 	@Column(name = "msrp", nullable = false)
+	@NotNull
 	private BigDecimal msrp;
 
 	@Column(name = "units_in_stock", nullable = false)
+	@NotNull
 	private Long unitsInStock;
 
 	@Column(name = "units_in_order", nullable = false)
+	@NotNull
 	private Long unitsInOrder;
 
 	@Column(name = "unit_price", nullable = false)
+	@NotNull
 	private BigDecimal unitPrice;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -73,10 +83,11 @@ public class Product implements Serializable {
 	@JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "color_id", nullable = false, updatable = false) })
 	private Set<Color> colors = new HashSet<Color>(0);
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "Product_Size", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "size_id", nullable = false, updatable = false) })
-	private Set<Size> size = new HashSet<Size>(0);
-	//
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "size_id")
+	private Size size;
+
+	
 	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	// @JoinTable(name = "Product_Order", joinColumns = {
 	// @JoinColumn(name = "product_id", nullable = false, updatable = false) },
@@ -87,6 +98,22 @@ public class Product implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private Set<Image> images = new HashSet<Image>(0);
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Generated(value = GenerationTime.INSERT)
@@ -136,12 +163,12 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String decription) {
+		this.description = decription;
 	}
 
 	public Partner getPartner() {
@@ -206,14 +233,6 @@ public class Product implements Serializable {
 
 	public void setColors(Set<Color> colors) {
 		this.colors = colors;
-	}
-
-	public Set<Size> getSize() {
-		return size;
-	}
-
-	public void setSize(Set<Size> size) {
-		this.size = size;
 	}
 
 	// public Set<Order> getOrders() {
