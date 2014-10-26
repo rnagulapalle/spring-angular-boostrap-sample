@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Address")
@@ -28,18 +29,26 @@ public class Address implements Serializable {
 	protected Long id;
 
 	@Column(name = "address1", nullable = false)
+	@NotEmpty
 	private String address1;
 
 	@Column(name = "address2")
 	private String address2;
 
 	@Column(name = "city", nullable = false)
+	@NotEmpty
 	private String city;
 
 	@Column(name = "state", nullable = false)
+	@NotEmpty
 	private String state;
+	
+	@Column(name = "country", nullable = false)
+	@NotEmpty
+	private String country;
 
 	@Column(name = "postalcode", nullable = false)
+	@NotEmpty
 	private String postalCode;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -132,6 +141,22 @@ public class Address implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	// public Set<Order> getOrders() {
