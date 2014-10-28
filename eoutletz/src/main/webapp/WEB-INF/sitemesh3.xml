@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<sitemesh>  
+	
+	<!-- Minimal Mappings -->
+	<mapping path="/login" decorator="/WEB-INF/decorator/minimal.jsp" />
+	<mapping path="/logout" decorator="/WEB-INF/decorator/minimal.jsp" />
+	<mapping path="/signup" decorator="/WEB-INF/decorator/minimal.jsp"/>
+	
+	<!-- Exclude path from decoration. -->
+    <!-- <mapping path="/*" exclude="true"/>  -->
+	
+</sitemesh> 
