@@ -1,6 +1,7 @@
 package com.eoutletz;
 
 import javax.inject.Inject;
+import javax.servlet.Filter;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import com.eoutletz.repository.UserRepository;
 
 @Configuration
 @ComponentScan
-@Import( {EoutletzRepositoryRestMvcConfiguration.class, SecurityConfig.class} )
+@Import( {EoutletzRepositoryRestMvcConfiguration.class, SecurityConfig.class, WebConfig.class} )
 @EnableAutoConfiguration
 public class Application 
 {
@@ -25,5 +26,25 @@ public class Application
     {
         return new UserEventHandler(userRepository);
     }
+    
+//    @Bean
+//    public FilterRegistrationBean siteMeshFilterRegistrationBean() 
+//    {
+//	    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//	    EOutletzSiteMeshFilter esmf = new EOutletzSiteMeshFilter(); 
+//	    registrationBean.addUrlPatterns("/*");
+//	    registrationBean.setFilter(esmf);
+//	    registrationBean.setOrder(2);
+//	    return registrationBean;
+//    }
+    
+    
+    @Bean
+    public Filter siteMeshFilterBean() 
+    {
+	    EOutletzSiteMeshFilter esmf = new EOutletzSiteMeshFilter(); 
+	    return esmf;
+    }
+    
     
 }
