@@ -1,6 +1,5 @@
 package com.eoutletz.test;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -14,6 +13,6 @@ import com.eoutletz.Application;
 @WebAppConfiguration
 public class ApplicationTest {
 	@Test
-public void contextLoads() {
-}
+	public void contextLoads() {
+	}
 }
