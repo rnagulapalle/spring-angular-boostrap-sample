@@ -40,5 +40,7 @@ public class UserEventHandler
 		 // Before we create a user, we need to encrypt the password
 		String hashedPwd = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
 		user.setPassword(hashedPwd); 
+		
+		System.out.println("################################# WOW ###################################");
 	 }
 }

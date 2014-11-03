@@ -19,7 +19,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "User")
@@ -33,19 +33,20 @@ public class User implements Serializable {
 	protected Long id;
 
 	@Column(name = "firstname")
-	@NotEmpty
+	@NotBlank
 	private String firstName;
 
 	@Column(name = "lastname")
-	@NotEmpty
+	@NotBlank
 	private String lastName;
 
 	@Column(name = "email", unique = true)
 	@Email
+	@NotBlank
 	private String email;
 
 	@Column(name = "password")
-	@NotEmpty
+	@NotBlank
 	private String password;
 
 	@Column(name = "merchant")
