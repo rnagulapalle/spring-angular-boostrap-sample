@@ -27,22 +27,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
     protected void configure(HttpSecurity http) throws Exception 
     {
-//		http.formLogin()
-//						.loginPage("/login")
-//						.defaultSuccessUrl("/home")
-//						.failureUrl("/login?error=1")
-//						.usernameParameter("username")
-//						.passwordParameter("password")
-//						.permitAll();
-//		
-//		// Http URL Filters
-//        http.authorizeRequests()
-//                		.antMatchers("/resources/**", "/styles/**", "/static/**", "/webjars/**", "/signup", "/login/**", 
-//                				"/images/**", "/scripts/**").permitAll()
-//                		.antMatchers("/api/*").permitAll()	
-//                		.antMatchers("/index.jsp").permitAll()
-//                		.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
-//        				.anyRequest().authenticated();
+		http.formLogin()
+						.loginPage("/login")
+						.defaultSuccessUrl("/home")
+						.failureUrl("/login?error=1")
+						.usernameParameter("username")
+						.passwordParameter("password")
+						.permitAll();
+		
+		// Http URL Filters
+        http.authorizeRequests()
+                		.antMatchers("/resources/**", "/styles/**", "/static/**", "/webjars/**", "/signup", "/login/**", 
+                				"/images/**", "/scripts/**", "/product").permitAll()
+                		.antMatchers("/api/*").permitAll()	
+                		.antMatchers("/index.html").permitAll()
+                		.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
+        				.anyRequest().authenticated();
 		
         // Disable the CSRF checking
         http.csrf().disable();
