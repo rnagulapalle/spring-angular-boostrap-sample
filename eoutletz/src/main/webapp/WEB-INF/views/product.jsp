@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Signup Page</title>
+		<title>Product Upload Page</title>
 	</head>
 
 	<body>
@@ -15,35 +15,13 @@
                 <div class="panel-body" >
                     <form:form commandName="prodCommand" id="productform" action="/product" class="form-horizontal" role="form" method="post">
 
-//                        <div class="form-group">
-//                            <label for="email" class="col-md-3 control-label">Email</label>
-//                            <div class="col-md-9">
-//                                <form:input type="text" class="form-control" path="email" placeholder="Email Address" />
-//                                <span class="help-block field-error"><form:errors path="email" /></span>
-//                            </div>
-//                        </div>
-//                            
-//                        <div class="form-group">
-//                            <label for="firstName" class="col-md-3 control-label">First Name</label>
-//                            <div class="col-md-9">
-//                                <form:input type="text" class="form-control" path="firstName" placeholder="First Name" />
-//                                <span class="help-block field-error"><form:errors path="firstName" /></span>
-//                            </div>
-//                        </div>
-//                        <div class="form-group">
-//                            <label for="lastName" class="col-md-3 control-label">Last Name</label>
-//                            <div class="col-md-9">
-//                                <form:input type="text" class="form-control" path="lastName" placeholder="Last Name" />
-//                                <span class="help-block field-error"><form:errors path="lastName" /></span>
-//                            </div>
-//                        </div>
-//                        <div class="form-group">
-//                            <label for="password" class="col-md-3 control-label">Password</label>
-//                            <div class="col-md-9">
-//                                <form:input type="password" class="form-control" path="password" placeholder="Password" />
-//                                <span class="help-block field-error"><form:errors path="password" /></span>
-//                            </div>
-//                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <form:input type="text" class="form-control" path="name" placeholder="Product Name" />
+                                <span class="help-block field-error"><form:errors path="name" /></span>
+                            </div>
+                        </div>
                             
                         <div class="form-group">
                             <!-- Button -->                                        
