@@ -60,19 +60,15 @@ public class Product implements Serializable {
 	private Long quantity;
 
 	@Column(name = "msrp", nullable = false)
-	@NotNull
 	private BigDecimal msrp;
 
 	@Column(name = "units_in_stock", nullable = false)
-	@NotNull
 	private Long unitsInStock;
 
 	@Column(name = "units_in_order", nullable = false)
-	@NotNull
 	private Long unitsInOrder;
 
 	@Column(name = "unit_price", nullable = false)
-	@NotNull
 	private BigDecimal unitPrice;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

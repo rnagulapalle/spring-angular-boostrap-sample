@@ -22,6 +22,49 @@
                                 <span class="help-block field-error"><form:errors path="name" /></span>
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+	                        <label for="price" class="col-md-3 control-label">Price</label>
+	                        <div class="col-md-9">
+	                            <form:input type="text" class="form-control" path="price" placeholder="Product Price" />
+	                            <span class="help-block field-error"><form:errors path="price" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="description" class="col-md-3 control-label">Description</label>
+	                        <div class="col-md-9">
+	                            <form:input type="text" class="form-control" path="description" placeholder="Product Description" />
+	                            <span class="help-block field-error"><form:errors path="description" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="quantity" class="col-md-3 control-label">Quantity</label>
+	                        <div class="col-md-9">
+	                            <form:input type="text" class="form-control" path="quantity" placeholder="Product Quantity" />
+	                            <span class="help-block field-error"><form:errors path="quantity" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="size" class="col-md-3 control-label">Size</label>
+	                        <div class="col-md-9">
+	                            <form:input type="text" class="form-control" path="size" placeholder="Product Size" />
+	                            <span class="help-block field-error"><form:errors path="size" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="msrp" class="col-md-3 control-label">MSRP</label>
+	                        <div class="col-md-9">
+	                            <form:input type="text" class="form-control" path="msrp" placeholder="Product MSRP" />
+	                            <span class="help-block field-error"><form:errors path="msrp" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="sku" class="col-md-3 control-label">SKU</label>
+	                        <div class="col-md-9">
+	                            <form:input type="text" class="form-control" path="sku" placeholder="Product SKU" />
+	                            <span class="help-block field-error"><form:errors path="sku" /></span>
+	                        </div>
+                        </div>
                             
                         <div class="form-group">
                             <!-- Button -->                                        
