@@ -9,7 +9,7 @@
 			        <a class="footer-text" href="#">Privacy</a> --%>   
 				</div>
 	      		<div class="col-md-4">
-	        		<p class="footer-text pull-right">© 2014 eClosetz. All rights reserved</p>
+	        		<p class="footer-text pull-right">ï¿½ 2014 eOutletz. All rights reserved</p>
 	      		</div>
 	    	</div>
 		</div>	

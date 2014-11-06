@@ -13,6 +13,7 @@
 	  	 <div id="productuploadbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-body" >
+                	<p>Add your product</p>
                     <form:form commandName="prodCommand" id="productform" action="/product" class="form-horizontal" role="form" method="post">
 
                         <div class="form-group">
@@ -47,8 +48,15 @@
                         <div class="form-group">
 	                        <label for="size" class="col-md-3 control-label">Size</label>
 	                        <div class="col-md-9">
-	                            <form:input type="text" class="form-control" path="size" placeholder="Product Size" />
+	                            <form:select items="${sizes}" class="form-control" path="size" itemValue="id" itemLabel="size"/>
 	                            <span class="help-block field-error"><form:errors path="size" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="categories" class="col-md-3 control-label">Categories</label>
+	                        <div class="col-md-9">
+	                            <form:checkboxes items="${categories}" class="form-control" path="categories" itemValue="id" itemLabel="name" placeholder="Product Categories" />
+	                            <span class="help-block field-error"><form:errors path="categories" /></span>
 	                        </div>
                         </div>
                         <div class="form-group">
@@ -65,11 +73,22 @@
 	                            <span class="help-block field-error"><form:errors path="sku" /></span>
 	                        </div>
                         </div>
-                            
+                        <div class="form-group">
+	                        <label for="image1" class="col-md-3 control-label">Images</label>
+	                        <div class="col-md-9">
+	                            <input type="file" name="file1" class="form-control" placeholder="Product Image1" />
+	                            <input type="file" name="file2" class="form-control" placeholder="Product Image2" />
+	                            <input type="file" name="file3" class="form-control" placeholder="Product Image3" />
+	                            <input type="file" name="file4" class="form-control" placeholder="Product Image4" />
+	                            <input type="file" name="file5" class="form-control" placeholder="Product Image5" />
+	                            <input type="file" name="file6" class="form-control" placeholder="Product Image6" />
+	                            <span class="help-block field-error"><form:errors /></span>
+	                        </div>
+                        </div>
                         <div class="form-group">
                             <!-- Button -->                                        
                             <div class="col-md-offset-3 col-md-9">
-                                <input type="submit" id="btn-upload" class="btn btn-info" value="&nbsp Upload" /> 
+                                <input type="submit" id="btn-save" class="btn btn-info" value="&nbsp Save" /> 
                             </div>
                         </div>
                     </form:form>
