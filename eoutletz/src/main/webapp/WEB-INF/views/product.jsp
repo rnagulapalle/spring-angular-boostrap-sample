@@ -9,12 +9,11 @@
 
 	<body>
 	  <div class="container"> 
-	  	  	
 	  	 <div id="productuploadbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-body" >
                 	<p>Add your product</p>
-                    <form:form commandName="prodCommand" id="productform" action="/product" class="form-horizontal" role="form" method="post">
+                    <form:form commandName="prodCommand" enctype="multipart/form-data" id="productform" action="/product" class="form-horizontal" role="form" method="post">
 
                         <div class="form-group">
                             <label for="name" class="col-md-3 control-label">Name</label>
@@ -76,12 +75,12 @@
                         <div class="form-group">
 	                        <label for="image1" class="col-md-3 control-label">Images</label>
 	                        <div class="col-md-9">
-	                            <input type="file" name="file1" class="form-control" placeholder="Product Image1" />
-	                            <input type="file" name="file2" class="form-control" placeholder="Product Image2" />
-	                            <input type="file" name="file3" class="form-control" placeholder="Product Image3" />
-	                            <input type="file" name="file4" class="form-control" placeholder="Product Image4" />
-	                            <input type="file" name="file5" class="form-control" placeholder="Product Image5" />
-	                            <input type="file" name="file6" class="form-control" placeholder="Product Image6" />
+	                        	<input  type="file" name="file" class="form-control" />
+	                        	<input type="file" name="file" class="form-control" />
+	                        	<input type="file" name="file" class="form-control" />
+	                        	<input type="file" name="file" class="form-control" />
+	                        	<input type="file" name="file" class="form-control" />
+	                        	<input type="file" name="file" class="form-control" />
 	                            <span class="help-block field-error"><form:errors /></span>
 	                        </div>
                         </div>

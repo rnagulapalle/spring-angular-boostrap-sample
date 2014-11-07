@@ -1,5 +1,8 @@
 package com.eoutletz;
 
+import javax.servlet.MultipartConfigElement;
+
+import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +26,15 @@ public class WebConfig  extends WebMvcConfigurerAdapter {
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }
-	
+    
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize("1280KB");
+        factory.setMaxRequestSize("1280KB");
+        return factory.createMultipartConfig();
+    }
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
     	resourceHandlerRegistry.addResourceHandler("/scripts/**").addResourceLocations("/scripts/").setCachePeriod(31556926);

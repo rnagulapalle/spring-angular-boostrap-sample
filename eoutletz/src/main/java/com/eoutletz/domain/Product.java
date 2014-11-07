@@ -62,22 +62,22 @@ public class Product implements Serializable {
 	@Column(name = "msrp", nullable = false)
 	private BigDecimal msrp;
 
-	@Column(name = "units_in_stock", nullable = false)
+	@Column(name = "units_in_stock", nullable = true)
 	private Long unitsInStock;
 
-	@Column(name = "units_in_order", nullable = false)
+	@Column(name = "units_in_order", nullable = true)
 	private Long unitsInOrder;
 
-	@Column(name = "unit_price", nullable = false)
+	@Column(name = "unit_price", nullable = true)
 	private BigDecimal unitPrice;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Product_Category", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "category_id", nullable = false, updatable = false) })
 	private Set<Category> categories = new HashSet<Category>(0);
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "color_id", nullable = false, updatable = false) })
-	private Set<Color> colors = new HashSet<Color>(0);
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "color_id", nullable = false, updatable = false) })
+//	private Set<Color> colors = new HashSet<Color>(0);
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "size_id")
@@ -91,8 +91,7 @@ public class Product implements Serializable {
 	// nullable = false, updatable = false) })
 	// private Set<Order> orders = new HashSet<Order>(0);
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@OneToMany(targetEntity = Image.class, fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.PERSIST)
 	private Set<Image> images = new HashSet<Image>(0);
 
 	public Long getId() {
@@ -223,13 +222,13 @@ public class Product implements Serializable {
 		this.categories = categories;
 	}
 
-	public Set<Color> getColors() {
-		return colors;
-	}
-
-	public void setColors(Set<Color> colors) {
-		this.colors = colors;
-	}
+//	public Set<Color> getColors() {
+//		return colors;
+//	}
+//
+//	public void setColors(Set<Color> colors) {
+//		this.colors = colors;
+//	}
 
 	// public Set<Order> getOrders() {
 	// return orders;
