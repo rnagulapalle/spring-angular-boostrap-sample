@@ -1,11 +1,13 @@
 package com.eoutletz.web;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +17,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eoutletz.domain.PasswordRequest;
 import com.eoutletz.domain.User;
+import com.eoutletz.mail.NotificationService;
+import com.eoutletz.repository.PasswordRequestRepository;
 import com.eoutletz.repository.UserRepository;
 
 @Controller
@@ -34,6 +41,12 @@ public class UserController
 	@Inject
 	@Named("authenticationProviderJdbcImpl")
 	private AuthenticationProvider authenticationProvider;
+	
+	@Inject
+	private PasswordRequestRepository passwordRequestRepository;
+	
+	@Inject
+	private NotificationService notificationService;
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/login")
 	public String showLoginPage()
@@ -89,4 +102,71 @@ public class UserController
 		
 		return "redirect:home";
 	}
+	
+	//Forgot Password
+	@RequestMapping(method=RequestMethod.GET, value = "/forgotpassword")
+	public String forgotPassword() 
+	{
+		return "forgotpassword";
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value = "/forgotpassword")
+	public String processForgotPassword(@RequestParam(required = true) String email) 
+	{
+		String param="error=1";
+		
+		// Verify email exists
+		
+		boolean usernameExists = userRepository.getUserCountWithEmail(email) > 0 ? true : false;
+		
+		if(usernameExists){
+			// Create a token and save it
+			
+			String token = RandomStringUtils.random(20, true, true);
+			
+			PasswordRequest passwordRequest = new PasswordRequest();
+			passwordRequest.setToken(token);
+			passwordRequest.setEmail(email);
+			passwordRequest.setCreationTime(new Date());
+			passwordRequest = passwordRequestRepository.save(passwordRequest);
+			
+			// Send the email with token
+			notificationService.sendForgotPasswordEmail(token, email);
+		}
+		
+		param = "reset=1";
+		
+		return "redirect:forgotpassword?" + param;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value = "/resetpassword")
+	public String resetPassword(@RequestParam(required=true) String token, Model model)
+	{
+		model.addAttribute("token", token);
+		return "resetpassword";
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value = "/resetpassword")
+	public String processResetPassword(@RequestParam(required=true) String token, @RequestParam(required=true) String newpassword, 
+				@RequestParam(required=true) String reenterpassword, Model model)
+	{
+		String param="error=1";
+		
+		if(StringUtils.isNotBlank(newpassword) && StringUtils.isNotBlank(reenterpassword) &&
+				newpassword.equals(reenterpassword))
+		{
+			// Get the password request
+			PasswordRequest passwordRequest = passwordRequestRepository.findByToken(token);
+			
+			User user = userRepository.findByEmail(passwordRequest.getEmail());
+			String hashedPwd = BCrypt.hashpw(newpassword, BCrypt.gensalt(12));
+			user.setPassword(hashedPwd); 
+			user = userRepository.save(user);
+			
+			param = "reset=1";
+		}
+		
+		return "redirect:resetpassword?" + param + "&token=" + token;
+	}
+	
 }
