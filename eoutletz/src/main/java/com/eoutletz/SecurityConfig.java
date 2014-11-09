@@ -19,14 +19,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	private AuthenticationProvider authenticationProvider;
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception 
-	{
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.authenticationProvider(authenticationProvider);	
 	}
 	
 	@Override
-    protected void configure(HttpSecurity http) throws Exception 
-    {
+    protected void configure(HttpSecurity http) throws Exception{
 		http.formLogin()
 						.loginPage("/login")
 						.defaultSuccessUrl("/home")
@@ -38,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		// Http URL Filters
         http.authorizeRequests()
                 		.antMatchers("/resources/**", "/styles/**", "/static/**", "/webjars/**", "/signup", "/login/**", 
-                				"/images/**", "/scripts/**", "/product").permitAll()
+                				"/images/**", "/scripts/**", "/product/**", "/partner").permitAll()
                 		.antMatchers("/api/*").permitAll()	
                 		.antMatchers("/index.html").permitAll()
                 		.antMatchers("/admin/**").hasAnyAuthority("ADMIN")

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
@@ -22,18 +21,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eoutletz.domain.Category;
 import com.eoutletz.domain.Image;
 import com.eoutletz.domain.Partner;
 import com.eoutletz.domain.Product;
+import com.eoutletz.domain.ShippingCharge;
 import com.eoutletz.domain.Size;
 import com.eoutletz.repository.CategoryRepository;
 import com.eoutletz.repository.PartnerRepository;
+import com.eoutletz.repository.ProductRepository;
+import com.eoutletz.repository.ShippingChargeRepository;
 import com.eoutletz.repository.SizeRepository;
 import com.eoutletz.service.ProductService;
 
@@ -46,7 +50,13 @@ public class ProductController {
 	private SizeRepository sizeRepository;
 	
 	@Autowired
+	private ShippingChargeRepository shippingChargeRepository;
+	
+	@Autowired
 	private PartnerRepository partnerRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -64,19 +74,36 @@ public class ProductController {
         return (List<Size>) sizeRepository.findAll();
     }
 	
+	@ModelAttribute("shippingCharges")
+    public List<ShippingCharge> getShippingCharges(){
+        return (List<ShippingCharge>) shippingChargeRepository.findAll();
+    }
+	
 	@RequestMapping(method=RequestMethod.GET, value = "/product")
-	public String showProductUploadPage(Map<String, Object> model){
+	public String showProduct(Map<String, Object> model){
+		
 		logger.debug("Inside the upload page");
 		Product prodCommand = new Product();
-		
+		model.put("message", "Add your product");
 		model.put("prodCommand", prodCommand);
 		
 		return "product";
 	}
 	
-	@SuppressWarnings("unchecked")
+	@RequestMapping(method=RequestMethod.GET, value = "/product/{id}")
+	public String editProduct(@PathVariable("id")String id, Map<String, Object> model){
+		
+		logger.debug("Inside the upload page");
+		//TODO check product belongs to partner
+		Product prodCommand = productRepository.findOne(Long.parseLong(id));
+		model.put("message", "Update your product");
+		model.put("prodCommand", prodCommand);
+		
+		return "product";
+	}
+	
 	@RequestMapping(method=RequestMethod.POST, value = "/product")
-	public String processUpload(@Valid @ModelAttribute("prodCommand") Product prodCommand, @RequestParam("file") MultipartFile[] files, BindingResult bindingResult, Map<String, Object> model, HttpServletRequest request) {
+	public String processUpload(@Valid @ModelAttribute("prodCommand") final Product prodCommand, @RequestParam(value = "file", required = false) final MultipartFile[] files, final BindingResult bindingResult, final Map<String, Object> model, final RedirectAttributes redirectAttributes) {
 		
 		if(bindingResult.hasErrors()){
 			logger.error(bindingResult.toString());
@@ -88,8 +115,8 @@ public class ProductController {
 		//TODO: hard coded image path on local server
 		String basePath = "http://localhost:8080/images/";
 		Set<Image> images = new java.util.HashSet<Image>(0);
-		//TODO:remove hardcoded partner data
 		
+		//TODO:raad partner data from session
 		Partner partner = partnerRepository.findOne(1l);
 		
 		if (files != null && files.length >0) {
@@ -126,7 +153,7 @@ public class ProductController {
 	                logger.error( "You failed to upload " + fileName + ": " + e.getMessage() );
 	            }
     		}
-    		//return msg;
+    		
     		//process form data
     		logger.debug("upload Form found: " + prodCommand);
     		
@@ -136,7 +163,8 @@ public class ProductController {
     		
     		try{
     			productService.saveProduct(prodCommand, images);
-    			return "redirect:home";
+    			redirectAttributes.addFlashAttribute("message", "Successfully added..");
+    			return "redirect:partner";
     		}catch(org.hibernate.exception.ConstraintViolationException e){
     			//TODO: handle sql exceptions
     			logger.error("Error", e);
@@ -152,19 +180,7 @@ public class ProductController {
         	return "product";
         }
 	}
-	
-//	@InitBinder
-//	protected void initBinder(HttpServletRequest request, WebDataBinder binder) throws Exception {
-//	    binder.registerCustomEditor(Size.class, "size", new PropertyEditorSupport() {
-//	    @Override
-//	    public void setAsText(String text) {
-//	    	Size size = new Size();
-//	    	size.setSize(text);
-//	        setValue(size);
-//	    }
-//	 });
-//	}
-	
+
 	class SizePropertyEditor extends PropertyEditorSupport {
 		@Override
 		public void setAsText(String text) {
@@ -175,7 +191,9 @@ public class ProductController {
 	
 	@InitBinder
 	public void initBinderAll(WebDataBinder binder) {
+		
 		binder.registerCustomEditor(Size.class, "size", new SizePropertyEditor());
+		
 		final List<Category> categories = (List<Category>) categoryRepository.findAll();
 		binder.registerCustomEditor(Set.class,"categories", new CustomCollectionEditor(Set.class){
             protected Object convertElement(Object element){
@@ -187,15 +205,15 @@ public class ProductController {
                 return null;
             }
         });
-		
-		binder.registerCustomEditor(Set.class,"images", new CustomCollectionEditor(Set.class){
-            protected Object convertElement(Object element){
-                if (element instanceof String) {
-                    //Category category = categories.get(Integer.parseInt(element.toString()));
-                    return element;
-                }
-                return null;
-            }
-        });
+		//remove this is as its not working
+//		binder.registerCustomEditor(Set.class,"images", new CustomCollectionEditor(Set.class){
+//            protected Object convertElement(Object element){
+//                if (element instanceof String) {
+//                    //Category category = categories.get(Integer.parseInt(element.toString()));
+//                    return element;
+//                }
+//                return null;
+//            }
+//        });
 	}
 }

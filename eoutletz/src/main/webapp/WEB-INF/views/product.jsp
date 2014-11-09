@@ -12,7 +12,7 @@
 	  	 <div id="productuploadbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-body" >
-                	<p>Add your product</p>
+                	<h2>${message}</h2>
                     <form:form commandName="prodCommand" enctype="multipart/form-data" id="productform" action="/product" class="form-horizontal" role="form" method="post">
 
                         <div class="form-group">
@@ -33,7 +33,7 @@
                         <div class="form-group">
 	                        <label for="description" class="col-md-3 control-label">Description</label>
 	                        <div class="col-md-9">
-	                            <form:input type="text" class="form-control" path="description" placeholder="Product Description" />
+	                            <form:input type="textarea" class="form-control" path="description" placeholder="Product Description" />
 	                            <span class="help-block field-error"><form:errors path="description" /></span>
 	                        </div>
                         </div>
@@ -49,6 +49,13 @@
 	                        <div class="col-md-9">
 	                            <form:select items="${sizes}" class="form-control" path="size" itemValue="id" itemLabel="size"/>
 	                            <span class="help-block field-error"><form:errors path="size" /></span>
+	                        </div>
+                        </div>
+                        <div class="form-group">
+	                        <label for="ShippingCharge" class="col-md-3 control-label">Shipping Charge</label>
+	                        <div class="col-md-9">
+	                            <form:select items="${shippingCharges}" class="form-control" path="shippingCharge" itemValue="id" itemLabel="cost"/>
+	                            <span class="help-block field-error"><form:errors path="shippingCharge" /></span>
 	                        </div>
                         </div>
                         <div class="form-group">

@@ -82,6 +82,10 @@ public class Product implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "size_id")
 	private Size size;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "shipping_cost_id")
+	private ShippingCharge shippingCharge;
 
 	
 	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -242,6 +246,14 @@ public class Product implements Serializable {
 
 	public void setImages(Set<Image> images) {
 		this.images = images;
+	}
+
+	public ShippingCharge getShippingCharge() {
+		return shippingCharge;
+	}
+
+	public void setShippingCharge(ShippingCharge shippingCharge) {
+		this.shippingCharge = shippingCharge;
 	}
 
 }
