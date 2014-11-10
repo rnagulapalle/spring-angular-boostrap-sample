@@ -84,6 +84,7 @@ public class ProductController {
 	@RequestMapping(method=RequestMethod.GET, value = "/product")
 	public String showProduct(Map<String, Object> model, HttpServletRequest request){
 		
+
 		logger.debug("Inside the upload page");
 		HttpSession session = request.getSession();
 		//remove prod_id from session if exists
