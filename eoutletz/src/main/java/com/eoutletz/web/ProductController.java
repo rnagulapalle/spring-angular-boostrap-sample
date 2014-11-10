@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
@@ -80,9 +82,14 @@ public class ProductController {
     }
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/product")
-	public String showProduct(Map<String, Object> model){
+	public String showProduct(Map<String, Object> model, HttpServletRequest request){
 		
 		logger.debug("Inside the upload page");
+		HttpSession session = request.getSession();
+		//remove prod_id from session if exists
+		if(session.getAttribute("prod_id") != null && StringUtils.isNotBlank((String) session.getAttribute("prod_id")))
+		session.removeAttribute("prod_id");
+		
 		Product prodCommand = new Product();
 		model.put("message", "Add your product");
 		model.put("prodCommand", prodCommand);
@@ -91,10 +98,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/product/{id}")
-	public String editProduct(@PathVariable("id")String id, Map<String, Object> model){
+	public String editProduct(@PathVariable("id")String id, Map<String, Object> model, HttpServletRequest request){
 		
 		logger.debug("Inside the upload page");
-		//TODO check product belongs to partner
+		//TODO check product belongs to partner to prevent other partners not updating products
+
+		//put prod id in session and use that at the time of update rather then creating new prod
+		HttpSession session = request.getSession();
+		session.setAttribute("prod_id", id);
+		
 		Product prodCommand = productRepository.findOne(Long.parseLong(id));
 		model.put("message", "Update your product");
 		model.put("prodCommand", prodCommand);
@@ -103,7 +115,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value = "/product")
-	public String processUpload(@Valid @ModelAttribute("prodCommand") final Product prodCommand, @RequestParam(value = "file", required = false) final MultipartFile[] files, final BindingResult bindingResult, final Map<String, Object> model, final RedirectAttributes redirectAttributes) {
+	public String processUpload(@Valid @ModelAttribute("prodCommand") final Product prodCommand, @RequestParam(value = "file", required = false) final MultipartFile[] files, final BindingResult bindingResult, final Map<String, Object> model, final HttpServletRequest request, final RedirectAttributes redirectAttributes) {
 		
 		if(bindingResult.hasErrors()){
 			logger.error(bindingResult.toString());
@@ -162,6 +174,12 @@ public class ProductController {
     		prodCommand.setPartner(partner);
     		
     		try{
+    			//check session prod_id exists in session
+    			HttpSession session = request.getSession();
+    			if(session.getAttribute("prod_id") != null && StringUtils.isNotBlank((String) session.getAttribute("prod_id"))){
+    				long id = Long.parseLong((String) request.getSession().getAttribute("prod_id"));
+    				prodCommand.setId(id);
+    			}
     			productService.saveProduct(prodCommand, images);
     			redirectAttributes.addFlashAttribute("message", "Successfully added..");
     			return "redirect:partner";
@@ -216,4 +234,5 @@ public class ProductController {
 //            }
 //        });
 	}
+
 }

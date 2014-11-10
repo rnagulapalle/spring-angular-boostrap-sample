@@ -38,7 +38,7 @@ public class ShippingCharge implements Serializable{
 	@NotEmpty
 	private String cost;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shippingCharge")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "shippingCharge")
 	private Set<Product> products = new HashSet<Product>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

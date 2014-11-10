@@ -21,7 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -95,7 +94,7 @@ public class Product implements Serializable {
 	// nullable = false, updatable = false) })
 	// private Set<Order> orders = new HashSet<Order>(0);
 
-	@OneToMany(targetEntity = Image.class, fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.PERSIST)
+	@OneToMany(targetEntity = Image.class, fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<Image> images = new HashSet<Image>(0);
 
 	public Long getId() {
