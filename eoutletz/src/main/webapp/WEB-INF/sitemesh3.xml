@@ -6,9 +6,9 @@
 	<mapping path="/logout" decorator="/WEB-INF/decorator/minimal.jsp" />
 	<mapping path="/signup" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/product" decorator="/WEB-INF/decorator/minimal.jsp"/>
+	<mapping path="/partner" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/forgotpassword" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/resetpassword" decorator="/WEB-INF/decorator/minimal.jsp"/>
-	
 	<!-- Exclude path from decoration. -->
     <!-- <mapping path="/*" exclude="true"/>  -->
 	
