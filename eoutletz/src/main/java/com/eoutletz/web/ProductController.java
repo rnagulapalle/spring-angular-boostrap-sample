@@ -184,6 +184,7 @@ public class ProductController {
     			if(session.getAttribute("prod_id") != null && StringUtils.isNotBlank((String) session.getAttribute("prod_id"))){
     				long id = Long.parseLong((String) request.getSession().getAttribute("prod_id"));
     				prodCommand.setId(id);
+    				prodCommand.setCreatedTime(Calendar.getInstance().getTime());
     			}
     			productService.saveProduct(prodCommand, images);
     			redirectAttributes.addFlashAttribute("message", "Successfully added..");
