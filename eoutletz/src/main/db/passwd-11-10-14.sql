@@ -1,0 +1,7 @@
+CREATE TABLE `password_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(256) DEFAULT NULL,
+  `token` varchar(128) DEFAULT NULL,
+  `creation_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;

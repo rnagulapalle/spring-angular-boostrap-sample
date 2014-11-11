@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
@@ -82,6 +84,8 @@ public class ProductController {
     }
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/product")
+
+
 	public String showProduct(Map<String, Object> model, HttpServletRequest request){
 		
 
@@ -107,7 +111,7 @@ public class ProductController {
 		//put prod id in session and use that at the time of update rather then creating new prod
 		HttpSession session = request.getSession();
 		session.setAttribute("prod_id", id);
-		
+
 		Product prodCommand = productRepository.findOne(Long.parseLong(id));
 		model.put("message", "Update your product");
 		model.put("prodCommand", prodCommand);
