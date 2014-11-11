@@ -9,7 +9,5 @@
 	<mapping path="/partner" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/forgotpassword" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/resetpassword" decorator="/WEB-INF/decorator/minimal.jsp"/>
-	<!-- Exclude path from decoration. -->
-    <!-- <mapping path="/*" exclude="true"/>  -->
-	
+
 </sitemesh> 

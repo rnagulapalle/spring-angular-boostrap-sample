@@ -34,7 +34,7 @@ public class Size implements Serializable {
 	@NotEmpty
 	private String size;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "size")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "size")
 	private Set<Product> products = new HashSet<Product>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
