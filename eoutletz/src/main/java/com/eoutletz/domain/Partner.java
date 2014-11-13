@@ -37,7 +37,7 @@ public class Partner implements Serializable {
 	@NotEmpty
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "partner")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
 	private Set<PartnerContact> partnerContacts = new HashSet<PartnerContact>(0);
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")

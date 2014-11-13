@@ -86,6 +86,9 @@ public class Product implements Serializable {
 	@JoinColumn(name = "shipping_cost_id")
 	private ShippingCharge shippingCharge;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sale_percentage")
+	private Sale sale;
 	
 	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	// @JoinTable(name = "Product_Order", joinColumns = {
@@ -253,6 +256,14 @@ public class Product implements Serializable {
 
 	public void setShippingCharge(ShippingCharge shippingCharge) {
 		this.shippingCharge = shippingCharge;
+	}
+
+	public Sale getSale() {
+		return sale;
+	}
+
+	public void setSale(Sale sale) {
+		this.sale = sale;
 	}
 
 }
