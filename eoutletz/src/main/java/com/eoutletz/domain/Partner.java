@@ -42,6 +42,9 @@ public class Partner implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
 	private Set<Product> products = new HashSet<Product>(0);
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
+	private Set<Orders> orders = new HashSet<Orders>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Generated(value = GenerationTime.INSERT)
@@ -98,4 +101,21 @@ public class Partner implements Serializable {
 	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
+	
 }

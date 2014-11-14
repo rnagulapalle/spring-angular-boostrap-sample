@@ -8,32 +8,38 @@
 	margin-top: 65px;
 }
 /*product table styles*/
-.Table
-    {
-        display: table;
-    }
-    .Title
-    {
-        display: table-caption;
-        text-align: center;
-        font-weight: bold;
-        font-size: larger;
-    }
-    .Heading
-    {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-    }
-    .Row
-    {
-        display: table-row;
-    }
-    .Cell
-    {
-        display: table-cell;
-        border: solid;
-        border-width: thin;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+.Table{
+    display: table;
+}
+.Title{
+    display: table-caption;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+.Heading{
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+	font-weight: normal;
+	font-size: 15px;
+ }
+.Row{
+   	display: table-row;
+}
+.Cell{
+	display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.table-wrapper{
+	padding: 1px 10px;
+	font-weight: normal;
+	font-size: 13px;
+}
+h5{
+	font-size: 15px;
+	font-weight: bold;
+}

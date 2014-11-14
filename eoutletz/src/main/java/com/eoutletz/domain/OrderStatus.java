@@ -30,10 +30,10 @@ public class OrderStatus implements Serializable {
 	protected Long id;
 
 	@Column(name = "status", nullable = false)
-	private Integer status;
-
+	private String status;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderStatus")
-	private Set<OrderTracking> orderTrackings = new HashSet<OrderTracking>(0);
+	private Set<Orders> orders = new HashSet<Orders>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Generated(value = GenerationTime.INSERT)
@@ -59,19 +59,29 @@ public class OrderStatus implements Serializable {
 		this.updatedTime = updatedTime;
 	}
 
-	public Set<OrderTracking> getOrderTrackings() {
-		return orderTrackings;
-	}
-
-	public void setOrderTrackings(Set<OrderTracking> orderTrackings) {
-		this.orderTrackings = orderTrackings;
-	}
-
-	public Integer getStatus() {
+	
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
+	
 }

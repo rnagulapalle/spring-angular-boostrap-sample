@@ -90,12 +90,12 @@ public class Product implements Serializable {
 	@JoinColumn(name = "sale_percentage")
 	private Sale sale;
 	
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	// @JoinTable(name = "Product_Order", joinColumns = {
-	// @JoinColumn(name = "product_id", nullable = false, updatable = false) },
-	// inverseJoinColumns = { @JoinColumn(name = "order_id",
-	// nullable = false, updatable = false) })
-	// private Set<Order> orders = new HashSet<Order>(0);
+	 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 @JoinTable(name = "Product_Order", joinColumns = {
+	 @JoinColumn(name = "product_id", nullable = false, updatable = false) },
+	 inverseJoinColumns = { @JoinColumn(name = "order_id",
+	 nullable = false, updatable = false) })
+	 private Set<Orders> orders = new HashSet<Orders>(0);
 
 	@OneToMany(targetEntity = Image.class, fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<Image> images = new HashSet<Image>(0);
@@ -236,12 +236,12 @@ public class Product implements Serializable {
 //		this.colors = colors;
 //	}
 
-	// public Set<Order> getOrders() {
-	// return orders;
-	// }
-	// public void setOrders(Set<Order> orders) {
-	// this.orders = orders;
-	// }
+	 public Set<Orders> getOrders() {
+	 return orders;
+	 }
+	 public void setOrders(Set<Orders> orders) {
+	 this.orders = orders;
+	 }
 	public Set<Image> getImages() {
 		return images;
 	}

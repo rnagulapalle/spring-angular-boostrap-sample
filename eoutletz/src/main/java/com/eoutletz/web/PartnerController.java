@@ -26,6 +26,7 @@ public class PartnerController {
 		ModelAndView modelAndView = new ModelAndView("partner");
 		modelAndView.addObject("partner", partner);
 		
+		
 		return modelAndView;
 	}
 }

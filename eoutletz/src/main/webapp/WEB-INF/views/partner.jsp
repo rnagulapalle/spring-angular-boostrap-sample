@@ -7,40 +7,88 @@
 	<body>
 	  <div class="container">
 	  	<div class="body-wrapper">
-		  	  <h1>Welcome ${partner.name}</h1>
-		  	  <h2><a href="/product">Add a product</a></h2>
+		  	  
+	  		  <h4>Welcome ${partner.name}</h4>
+		  	  
+		  	  <h5 class="addproduct"><a href="/product">Add a product</a></h5>
 			  <div class="panel-body prodlist-body" >
-			  <c:if test="${not empty message}">
-			  	<p class="success">${message}</p>
-			  </c:if>
-			  <c:if test="${not empty partner.products}">	
-			  <div class="Table">
-			    <div class="Title">
-			    	<h2>Your product catelog</h2>
-			    </div>
-			    <div class="Heading">
-			        <div class="Cell">
-			            <p>Product Name</p>
-			        </div>
-			        <div class="Cell">
-			            <p>Action</p>
-			        </div>
-			    </div>
-					<c:forEach var="product" items="${partner.products}">
-						<!-- href to prod edit page-->
-						<!--<a href="/product/${product.id}"><li>${product.name}</li></a>-->
-						<div class="Row">
+				  <c:if test="${not empty message}">
+				  	<p class="success">${message}</p>
+				  </c:if>
+				  
+			  <!-- Order list -->
+			  <c:if test="${not empty partner.orders}">	
+			  	<div class="table-wrapper">
+					  <div class="Table">
+					    <div class="Title">
+					    	<h5>Your order list</h5>
+					    </div>
+					    <div class="Heading">
 					        <div class="Cell">
-					            <p>${product.name}</p>
+					            <p>OrderId</p>
 					        </div>
 					        <div class="Cell">
-					            <p><a href="/product/${product.id}">Edit</a></p>
-					            <p><a href="/clone/${product.id}">Clone</a></p>
-					            <p><a href="/sale/${product.id}">Add To Sale</a></p>
+				            	<p>Status</p>
+				            </div>
+				           <div class="Cell">
+			            		<p>Details</p>
+			            	</div>
+					        <div class="Cell">
+					            <p>Action</p>
 					        </div>
-				        </div>
-					</c:forEach>		 
-				</div>
+					    </div>
+							<c:forEach var="order" items="${partner.orders}">
+								<div class="Row">
+							        <div class="Cell">
+							            <p>${order.id}</p>
+							        </div>
+							        <div class="Cell">
+							        	<p>${order.orderStatus.status}</p>
+						            </div>
+						            <div class="Cell">
+						            	<p><a href="#">See Order</a></p>
+						            </div>
+							        <div class="Cell">
+							        	<!-- show this only if status eq ordered-->
+							            <p><a href="#">Update Status</a></p>
+							        </div>
+						        </div>
+							</c:forEach>		 
+						</div>
+					</div>
+				</c:if> 
+				
+				<!-- Products list-->
+			  <c:if test="${not empty partner.products}">
+			  	<div class="table-wrapper">
+					 <div class="Table">
+					    <div class="Title">
+					    	<h5>Your product catelog</h5>
+					    </div>
+					    <div class="Heading">
+					        <div class="Cell">
+					            <p>Product Name</p>
+					        </div>
+					        <div class="Cell">
+					            <p>Action</p>
+					        </div>
+					    </div>
+							<c:forEach var="product" items="${partner.products}">
+								<!-- href to prod edit page-->
+								<!--<a href="/product/${product.id}"><li>${product.name}</li></a>-->
+								<div class="Row">
+							        <div class="Cell">
+							            <p>${product.name}</p>
+							        </div>
+							        <div class="Cell">
+							            <p><a href="/product/${product.id}">Edit</a> &nbsp;
+							            <a href="/clone/${product.id}">Clone</a> &nbsp;
+							            <a href="/sale/${product.id}">Add To Sale</a></p>
+							        </div>
+						        </div>
+							</c:forEach>		 
+						</div>
+					</div>
 				</c:if> 
 			 </div>
 		 </div>

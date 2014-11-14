@@ -56,9 +56,8 @@ public class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Address> address = new HashSet<Address>(0);
 
-	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
-	// "user")
-	// private Set<Order> orders = new HashSet<Order>(0);
+	 @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	 private Set<Orders> orders = new HashSet<Orders>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Generated(value = GenerationTime.INSERT)
@@ -132,10 +131,10 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	// public Set<Order> getOrders() {
-	// return orders;
-	// }
-	// public void setOrders(Set<Order> orders) {
-	// this.orders = orders;
-	// }
+	 public Set<Orders> getOrders() {
+		 return orders;
+	 }
+	 public void setOrders(Set<Orders> orders) {
+		 this.orders = orders;
+	 }
 }
