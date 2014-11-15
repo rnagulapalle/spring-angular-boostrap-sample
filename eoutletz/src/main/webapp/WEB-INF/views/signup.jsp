@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Signup Page</title>
+		<title>eOutletz - Signup Page</title>
 	</head>
 
 	<body>

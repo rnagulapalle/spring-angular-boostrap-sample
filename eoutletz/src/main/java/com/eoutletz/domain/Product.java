@@ -2,8 +2,13 @@ package com.eoutletz.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,7 +32,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Product")
-public class Product implements Serializable {
+public class Product implements Serializable, Comparable<Product> {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -53,7 +59,7 @@ public class Product implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "partner_id")
 	private Partner partner;
-	
+
 	@Column(name = "quantity", nullable = false)
 	@NotNull
 	private Long quantity;
@@ -74,14 +80,17 @@ public class Product implements Serializable {
 	@JoinTable(name = "Product_Category", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "category_id", nullable = false, updatable = false) })
 	private Set<Category> categories = new HashSet<Category>(0);
 
-//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "color_id", nullable = false, updatable = false) })
-//	private Set<Color> colors = new HashSet<Color>(0);
+	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	// @JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name =
+	// "product_id", nullable = false, updatable = false) }, inverseJoinColumns
+	// = { @JoinColumn(name = "color_id", nullable = false, updatable = false)
+	// })
+	// private Set<Color> colors = new HashSet<Color>(0);
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "size_id")
 	private Size size;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shipping_cost_id")
 	private ShippingCharge shippingCharge;
@@ -89,13 +98,10 @@ public class Product implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sale_percentage")
 	private Sale sale;
-	
-	 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 @JoinTable(name = "Product_Order", joinColumns = {
-	 @JoinColumn(name = "product_id", nullable = false, updatable = false) },
-	 inverseJoinColumns = { @JoinColumn(name = "order_id",
-	 nullable = false, updatable = false) })
-	 private Set<Orders> orders = new HashSet<Orders>(0);
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Product_Order", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "order_id", nullable = false, updatable = false) })
+	private Set<Orders> orders = new HashSet<Orders>(0);
 
 	@OneToMany(targetEntity = Image.class, fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<Image> images = new HashSet<Image>(0);
@@ -228,20 +234,22 @@ public class Product implements Serializable {
 		this.categories = categories;
 	}
 
-//	public Set<Color> getColors() {
-//		return colors;
-//	}
-//
-//	public void setColors(Set<Color> colors) {
-//		this.colors = colors;
-//	}
+	// public Set<Color> getColors() {
+	// return colors;
+	// }
+	//
+	// public void setColors(Set<Color> colors) {
+	// this.colors = colors;
+	// }
 
-	 public Set<Orders> getOrders() {
-	 return orders;
-	 }
-	 public void setOrders(Set<Orders> orders) {
-	 this.orders = orders;
-	 }
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
+
 	public Set<Image> getImages() {
 		return images;
 	}
@@ -266,4 +274,37 @@ public class Product implements Serializable {
 		this.sale = sale;
 	}
 
+	@Override
+	public int compareTo(Product product) {
+
+		Date updatedTime = ((Product) product).getUpdatedTime();
+
+		// ascending order
+		return this.updatedTime.compareTo(updatedTime);
+
+		// descending order
+		// return compareQuantity - this.quantity;
+	}
+
+	public static Comparator<Product> ProductUpdateTimeComparator = new Comparator<Product>() {
+
+		public int compare(Product prod1, Product prod2) {
+
+			Date updatedTime1 = prod1.getUpdatedTime();
+			Date updatedTime2 = prod2.getUpdatedTime();
+
+			// ascending order
+			return updatedTime2.compareTo(updatedTime1);
+
+			// descending order
+			// return fruitName2.compareTo(fruitName1);
+		}
+
+	};
+	
+	public static <T extends Comparable<? super T>> List<Product> asSortedList(Collection<T> c) {
+	  List<Product> list = (List<Product>) new ArrayList<T>(c);
+	  Collections.sort(list, ProductUpdateTimeComparator);
+	  return list;
+	}
 }

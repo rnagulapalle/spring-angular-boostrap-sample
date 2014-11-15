@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Login</title>
+		<title>eOutletz - Partner Details</title>
 	</head>
 	<body>
 	  <div class="container">
@@ -17,7 +17,7 @@
 				  </c:if>
 				  
 			  <!-- Order list -->
-			  <c:if test="${not empty partner.orders}">	
+			  <c:if test="${not empty orders}">	
 			  	<div class="table-wrapper">
 					  <div class="Table">
 					    <div class="Title">
@@ -37,7 +37,7 @@
 					            <p>Action</p>
 					        </div>
 					    </div>
-							<c:forEach var="order" items="${partner.orders}">
+							<c:forEach var="order" items="${orders}">
 								<div class="Row">
 							        <div class="Cell">
 							            <p>${order.id}</p>
@@ -46,11 +46,11 @@
 							        	<p>${order.orderStatus.status}</p>
 						            </div>
 						            <div class="Cell">
-						            	<p><a href="#">See Order</a></p>
+						            	<p><a href="/order/${order.id}">See Order</a></p>
 						            </div>
 							        <div class="Cell">
 							        	<!-- show this only if status eq ordered-->
-							            <p><a href="#">Update Status</a></p>
+							            <p><a href="/order/status/${order.id}">Update Status</a></p>
 							        </div>
 						        </div>
 							</c:forEach>		 
@@ -59,7 +59,7 @@
 				</c:if> 
 				
 				<!-- Products list-->
-			  <c:if test="${not empty partner.products}">
+			  <c:if test="${not empty products}">
 			  	<div class="table-wrapper">
 					 <div class="Table">
 					    <div class="Title">
@@ -73,7 +73,7 @@
 					            <p>Action</p>
 					        </div>
 					    </div>
-							<c:forEach var="product" items="${partner.products}">
+							<c:forEach var="product" items="${products}">
 								<!-- href to prod edit page-->
 								<!--<a href="/product/${product.id}"><li>${product.name}</li></a>-->
 								<div class="Row">

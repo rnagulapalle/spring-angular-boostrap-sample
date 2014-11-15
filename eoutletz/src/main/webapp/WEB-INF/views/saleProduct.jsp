@@ -2,7 +2,7 @@
 	  	 <div id="productuploadbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-body" >
-                	<h2>${message}</h2>
+                	<h3>${message}</h3>
                     <form:form commandName="prodCommand" enctype="multipart/form-data" id="productform" action="/product" class="form-horizontal" role="form" method="post">
                     	
 	                    <div class="form-group">

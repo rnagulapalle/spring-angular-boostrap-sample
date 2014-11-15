@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Product Page</title>
+		<title>eOutletz - Product Page</title>
 	</head>
 	<body>
 		<c:if test="${action == 'add'}">

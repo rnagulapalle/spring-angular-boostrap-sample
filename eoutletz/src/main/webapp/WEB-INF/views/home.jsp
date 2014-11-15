@@ -5,7 +5,7 @@
 <html>
 
 	<head>
-		<title>Home Page</title>
+		<title>eOutletz - Home Page</title>
 	</head>
 
 	<body>

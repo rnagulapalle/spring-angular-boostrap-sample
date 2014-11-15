@@ -1,8 +1,13 @@
 package com.eoutletz.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,10 +24,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "Orders")
-public class Orders implements Serializable {
+public class Orders implements Serializable, Comparable<Orders> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,22 +48,23 @@ public class Orders implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "payment_type_id")
 	private PaymentType paymentType;
-	
+
 	@Column(name = "amount")
 	protected Long amount;
-	
+
 	@Column(name = "tracking_number")
+	@NotBlank
 	private String trackingNumber;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "partner_id")
 	private Partner partner;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_status_id")
 	private OrderStatus orderStatus;
 
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orders")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orders")
 	private Set<Product> products = new HashSet<Product>(0);
 
 	@Column(name = "create_date	", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -100,13 +107,13 @@ public class Orders implements Serializable {
 		this.address = address;
 	}
 
-	 public Set<Product> getProducts() {
-	 return products;
-	 }
-	
-	 public void setProducts(Set<Product> products) {
-	 this.products = products;
-	 }
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 
 	public PaymentType getPaymentType() {
 		return paymentType;
@@ -155,5 +162,55 @@ public class Orders implements Serializable {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	
+
+	@Override
+	public int compareTo(Orders orders) {
+
+		Date updatedTime = ((Orders) orders).getUpdatedTime();
+
+		// ascending order
+		return this.updatedTime.compareTo(updatedTime);
+
+		// descending order
+		// return compareQuantity - this.quantity;
+	}
+
+	public static Comparator<Orders> OrdersUpdateTimeComparator = new Comparator<Orders>() {
+
+		public int compare(Orders orders1, Orders orders2) {
+
+			Date updatedTime1 = orders1.getUpdatedTime();
+			Date updatedTime2 = orders2.getUpdatedTime();
+
+			// ascending order
+			return updatedTime2.compareTo(updatedTime1);
+
+			// descending order
+			// return fruitName2.compareTo(fruitName1);
+		}
+
+	};
+
+	public static Comparator<Orders> OrdersCreatedTimeComparator = new Comparator<Orders>() {
+
+		public int compare(Orders orders1, Orders orders2) {
+
+			Date createdTime1 = orders1.getCreatedTime();
+			Date createdTime2 = orders2.getCreatedTime();
+
+			// ascending order
+			return createdTime1.compareTo(createdTime2);
+
+			// descending order
+			// return fruitName2.compareTo(fruitName1);
+		}
+
+	};
+
+	public static <T extends Comparable<? super T>> List<Orders> asSortedList(
+			Collection<T> c) {
+		List<Orders> list = (List<Orders>) new ArrayList<T>(c);
+		Collections.sort(list, OrdersCreatedTimeComparator);
+		return list;
+	}
 }

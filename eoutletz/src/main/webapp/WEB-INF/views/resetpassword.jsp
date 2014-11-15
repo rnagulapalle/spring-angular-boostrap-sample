@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Reset Password</title>
+		<title>eOutletz - Reset Password</title>
 	</head>
 	<body>
 	  <div class="container">

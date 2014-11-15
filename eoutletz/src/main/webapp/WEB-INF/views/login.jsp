@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Login</title>
+		<title>eOutletz - Login</title>
 	</head>
 
 	<body>

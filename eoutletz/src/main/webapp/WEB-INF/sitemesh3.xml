@@ -6,9 +6,12 @@
 	<mapping path="/logout" decorator="/WEB-INF/decorator/minimal.jsp" />
 	<mapping path="/signup" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/product" decorator="/WEB-INF/decorator/minimal.jsp"/>
+	<mapping path="/order" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/product/*" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/clone/*" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/sale/*" decorator="/WEB-INF/decorator/minimal.jsp"/>
+	<mapping path="/order/*" decorator="/WEB-INF/decorator/minimal.jsp"/>
+	<mapping path="/order/status/*" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/partner" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/forgotpassword" decorator="/WEB-INF/decorator/minimal.jsp"/>
 	<mapping path="/resetpassword" decorator="/WEB-INF/decorator/minimal.jsp"/>

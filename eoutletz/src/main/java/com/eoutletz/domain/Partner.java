@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Generated;
@@ -41,6 +43,7 @@ public class Partner implements Serializable {
 	private Set<PartnerContact> partnerContacts = new HashSet<PartnerContact>(0);
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
+	@OrderBy("updatedTime ASC")
 	private Set<Product> products = new HashSet<Product>(0);
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "partner")
