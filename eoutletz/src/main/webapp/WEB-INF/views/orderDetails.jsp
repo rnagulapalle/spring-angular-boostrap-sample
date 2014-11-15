@@ -15,14 +15,14 @@
 			<h4>Order details</h4>
 			<div class="table-wrapper">
 				<div class="table">
-					<div class="tRow C">
+					<%-- <div class="tRow C">
 						<p>
 							<label>ID:</label>
 						</p>
 						<div class="tCell">
 							<label>${order.id }</label>
 						</div>
-					</div>
+					</div> --%>
 					<div class="tRow B">
 						<p>
 							<label>Products:</label>
@@ -41,6 +41,7 @@
 							<label>Shipping Address:</label>
 						</p>
 						<div class="tCell">
+							<label>${order.user.firstName } ${order.user.lastName }</label> <br />
 							<label>${order.address.address1},
 								${order.address.address2}</label> <br /> <label>${order.address.city},
 								${order.address.state}, ${order.address.postalCode}</label> <br /> <label>${order.address.country}</label>
