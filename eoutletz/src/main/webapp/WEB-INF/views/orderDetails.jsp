@@ -11,56 +11,53 @@
 </head>
 <body>
 	<div class="container">
-		<div class="body-wrapper">
-			<h4>Order details</h4>
-			<div class="table-wrapper">
-				<div class="table">
-					<%-- <div class="tRow C">
-						<p>
-							<label>ID:</label>
-						</p>
-						<div class="tCell">
-							<label>${order.id }</label>
-						</div>
-					</div> --%>
-					<div class="tRow B">
-						<p>
-							<label>Products:</label>
-						</p>
-						<div class="tCell">
-							<c:if test="${not empty order.products}">
-								<c:forEach var="product" items="${order.products}">
-									<label>${product.name}</label>
-									<br />
-								</c:forEach>
-							</c:if>
-						</div>
-					</div>
-					<div class="tRow B">
-						<p>
-							<label>Shipping Address:</label>
-						</p>
-						<div class="tCell">
-							<label>${order.user.firstName } ${order.user.lastName }</label> <br />
-							<label>${order.address.address1},
-								${order.address.address2}</label> <br /> <label>${order.address.city},
-								${order.address.state}, ${order.address.postalCode}</label> <br /> <label>${order.address.country}</label>
-						</div>
-					</div>
-					<div class="tRow C">
-						<p>
-							<label>Amount Paid:</label>
-						</p>
-						<div class="tCell">
-							<label>${order.amount }</label>
-						</div>
-					</div>
-					<div class="tRow C">
-						<p>
-							<label>Status:</label>
-						</p>
-						<div class="tCell">
-							<label>${order.orderStatus.status}</label>
+		<div id="productuploadbox" style="margin-top: 50px"
+			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-body">
+					<h4>Order details</h4>
+					<div class="table-wrapper">
+						<div class="table">
+							<div class="tRow B">
+								<p>
+									<label>Products:</label>
+								</p>
+								<div class="tCell">
+									<c:if test="${not empty order.products}">
+										<c:forEach var="product" items="${order.products}">
+											<label>${product.name}</label>
+											<br />
+										</c:forEach>
+									</c:if>
+								</div>
+							</div>
+							<div class="tRow B">
+								<p>
+									<label>Shipping Address:</label>
+								</p>
+								<div class="tCell">
+									<label>${order.user.firstName } ${order.user.lastName }</label>
+									<br /> <label>${order.address.address1},
+										${order.address.address2}</label> <br /> <label>${order.address.city},
+										${order.address.state}, ${order.address.postalCode}</label> <br /> <label>${order.address.country}</label>
+								</div>
+							</div>
+							<div class="tRow C">
+								<p>
+									<label>Amount Paid:</label>
+								</p>
+								<div class="tCell">
+									<label>${order.amount }</label>
+								</div>
+							</div>
+							<div class="tRow C">
+								<p>
+									<label>Status:</label>
+								</p>
+								<div class="tCell">
+									<label>${order.orderStatus.status}</label>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
