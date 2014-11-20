@@ -2,7 +2,6 @@ package com.eoutletz.mail;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
@@ -25,10 +24,11 @@ public class NotificationService {
 	@Inject
 	private VelocityEngine velocityEngine;
 	
-	public void sendForgotPasswordEmail(String token, String email) 
+	public void sendForgotPasswordEmail(String token, String email, String forgotPasswordBaseUrl) 
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("token", token);
+		data.put("forgotPasswordBaseUrl", forgotPasswordBaseUrl);
 		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "templates/forgot-pwd-template.vm", "UTF-8", data);
 		sendEmail(email, null, "eoutletzalpha@gmail.com", "Reset Password Email", emailText);
 	}

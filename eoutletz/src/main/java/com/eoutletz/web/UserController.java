@@ -11,6 +11,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +31,7 @@ import com.eoutletz.domain.User;
 import com.eoutletz.mail.NotificationService;
 import com.eoutletz.repository.PasswordRequestRepository;
 import com.eoutletz.repository.UserRepository;
+import com.eoutletz.service.UserService;
 
 @Controller
 public class UserController 
@@ -47,6 +50,12 @@ public class UserController
 	
 	@Inject
 	private NotificationService notificationService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Value("${eoutletz.forgot.password.base.url}")
+    private String forgotPasswordBaseUrl;
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/login")
 	public String showLoginPage()
@@ -121,17 +130,16 @@ public class UserController
 		
 		if(usernameExists){
 			// Create a token and save it
-			
 			String token = RandomStringUtils.random(20, true, true);
 			
 			PasswordRequest passwordRequest = new PasswordRequest();
 			passwordRequest.setToken(token);
 			passwordRequest.setEmail(email);
 			passwordRequest.setCreationTime(new Date());
-			passwordRequest = passwordRequestRepository.save(passwordRequest);
 			
+			userService.saveToken(passwordRequest);			
 			// Send the email with token
-			notificationService.sendForgotPasswordEmail(token, email);
+			notificationService.sendForgotPasswordEmail(token, email, forgotPasswordBaseUrl);
 		}
 		
 		param = "reset=1";

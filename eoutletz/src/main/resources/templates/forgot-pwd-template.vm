@@ -1,7 +1,7 @@
 <html>
 <body>
 <div>
-To reset Password <a href="http://localhost:9898/resetpassword?token=${token}">Click here</a>.
+To reset Password <a href="${forgotPasswordBaseUrl}/resetpassword?token=${token}">Click here</a>.
 </div>
 </body>
 </html>

@@ -18,7 +18,9 @@
 					</h5>
 					<div class="panel-body prodlist-body">
 						<c:if test="${not empty message}">
-							<p class="success">${message}</p>
+							<div id="logout-alert" class="alert alert-success">
+								${message} 
+	                		</div>
 						</c:if>
 						
 						<!-- display incoming messages to seller-->

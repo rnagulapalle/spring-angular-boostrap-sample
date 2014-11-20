@@ -22,7 +22,7 @@ import com.eoutletz.web.ProductController;
 @Transactional(propagation = Propagation.REQUIRED) 
 public class ProductService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 	
 	@Autowired
 	private ProductRepository productRepository;
