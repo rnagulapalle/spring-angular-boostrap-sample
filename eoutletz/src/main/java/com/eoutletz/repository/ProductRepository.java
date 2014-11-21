@@ -21,5 +21,6 @@ public interface ProductRepository  extends PagingAndSortingRepository<Product, 
     public Page<Product> findByPartner(Partner partner, Pageable pageable);
 	
 	//List<Product> findProductsOrderByUpdatedTimeDesc(Date updatedTime);
-
+//	@Query("SELECT t.tokenName FROM Role r JOIN r.tkns t WHERE r.roleId = :roleId")
+//	List<User> findUsersLikedProduct(long prodId);
 }

@@ -79,6 +79,14 @@ public class Product implements Serializable, Comparable<Product> {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Product_Category", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "category_id", nullable = false, updatable = false) })
 	private Set<Category> categories = new HashSet<Category>(0);
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Product_User_Likes", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "user_id", nullable = false, updatable = false) })
+	private Set<User> userLikes = new HashSet<User>(0);
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Product_User_Reviews", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "user_id", nullable = false, updatable = false) })
+	private Set<User> userReviews = new HashSet<User>(0);
 
 	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	// @JoinTable(name = "Product_Color", joinColumns = { @JoinColumn(name =
@@ -272,6 +280,22 @@ public class Product implements Serializable, Comparable<Product> {
 
 	public void setSale(Sale sale) {
 		this.sale = sale;
+	}
+
+	public Set<User> getUserLikes() {
+		return userLikes;
+	}
+
+	public void setUserLikes(Set<User> userLikes) {
+		this.userLikes = userLikes;
+	}
+
+	public Set<User> getUserReviews() {
+		return userReviews;
+	}
+
+	public void setUserReviews(Set<User> userReviews) {
+		this.userReviews = userReviews;
 	}
 
 	@Override
