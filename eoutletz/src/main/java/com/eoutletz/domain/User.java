@@ -54,13 +54,13 @@ public class User implements Serializable {
 	@Type(type = "org.hibernate.type.YesNoType")
 	private boolean merchant;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Address> address = new HashSet<Address>(0);
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userFrom")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userFrom")
 	private Set<Messages> messagesFrom = new HashSet<Messages>(0);
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userTo")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userTo")
 	private Set<Messages> messagesTo = new HashSet<Messages>(0);
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")

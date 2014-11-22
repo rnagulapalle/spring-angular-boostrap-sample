@@ -8,7 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
 
-import com.eoutletz.domain.Product;
 import com.eoutletz.domain.User;
 
 @Repository
@@ -28,5 +27,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>{
 
 	@Query("select p.id from Product p join p.userLikes u where u.id = ?1")
 	@RestResource(rel = "byUser", path = "byUser")
-	List<Product> findProductsLikedById(long id);
+	List<Long> findProductsLikedById(long id);
 }

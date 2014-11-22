@@ -75,6 +75,9 @@ public class Product implements Serializable, Comparable<Product> {
 
 	@Column(name = "unit_price", nullable = true)
 	private BigDecimal unitPrice;
+	
+	@Column(name = "likes", nullable = true)
+	private Long likes;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Product_Category", joinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "category_id", nullable = false, updatable = false) })
@@ -296,6 +299,14 @@ public class Product implements Serializable, Comparable<Product> {
 
 	public void setUserReviews(Set<User> userReviews) {
 		this.userReviews = userReviews;
+	}
+
+	public Long getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Long likes) {
+		this.likes = likes;
 	}
 
 	@Override
