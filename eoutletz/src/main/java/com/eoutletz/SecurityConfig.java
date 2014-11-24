@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		
 		// Http URL Filters
         http.authorizeRequests()
-                		.antMatchers("/resources/**", "/styles/**", "/static/**", "/webjars/**", "/signup", "/login/**", 
+                		.antMatchers("/resources/**", "/assets/**", "/app/**", "/static/**", "/webjars/**", "/signup", "/login/**", 
                 				"/images/**", "/scripts/**", "/product/**", "/partner", "/forgotpassword", "/resetpassword", "/clone/**", "/sale/**", "/order/**", "/order/status/**", "/message/**", "/message/reply/**", "message/send").permitAll()
                 		.antMatchers("/api/**").permitAll()	
                 		.antMatchers("/index.html").permitAll()

@@ -2,9 +2,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  
-<link href="/styles/main.css" rel="stylesheet">
+<link href="/assets/styles/main.css" rel="stylesheet">
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
